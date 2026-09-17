@@ -24,6 +24,7 @@ env/
 *.pth
 *.ckpt
 *.safetensors
+*.pkl
 
 # Logs
 *.log
