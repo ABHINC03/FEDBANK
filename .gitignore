@@ -1,0 +1,37 @@
+# =========================
+# FedBank - Git Ignore
+# =========================
+
+# Dataset files
+data/*.csv
+data/*.zip
+data/*.parquet
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Model checkpoints
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
