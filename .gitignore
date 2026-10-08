@@ -7,6 +7,12 @@ data/*.csv
 data/*.zip
 data/*.parquet
 
+# Pipeline data directories (Section 9 of preprocessing spec)
+data/raw/
+data/interim/
+data/processed/
+artifacts/*.npz
+
 # Python cache
 __pycache__/
 *.pyc
