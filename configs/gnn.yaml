@@ -1,0 +1,44 @@
+seed: 42
+seeds: [42, 43, 44]
+device: "cuda"
+
+data:
+  graph_dir: "data/graphs"
+  num_features: 48
+
+model:
+  hidden_dim: 128
+  num_layers: 3
+  dropout: 0.3
+  activation: "relu"
+  norm: "layernorm"
+  heads: 4
+  ablation_heads: 16
+
+training:
+  batch_size: 2048
+  train_num_neighbors: [10, 5, 2]
+  eval_num_neighbors: [10, 5, 2]
+  lr: 0.001
+  weight_decay: 0.0001
+  max_epochs: 100
+  patience: 10
+  metric_for_best: "val_auprc"
+  loss: "bce_with_logits"  # or "focal"
+  focal_gamma: 2.0
+
+baselines:
+  lgbm:
+    n_estimators: 300
+    learning_rate: 0.05
+    max_depth: 6
+    subsample: 0.8
+    colsample_bytree: 0.8
+  mlp:
+    hidden_dim: 128
+    num_layers: 3
+    dropout: 0.3
+    lr: 0.001
+    batch_size: 2048
+    epochs: 50
+    patience: 10

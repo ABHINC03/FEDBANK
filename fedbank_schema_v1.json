@@ -1,0 +1,485 @@
+{
+  "schema_version": "fedbank_schema_v1",
+  "n_features": 48,
+  "label": "isFraud",
+  "source_track": "Track A (48 selected features)",
+  "feature_order_is_fixed": true,
+  "split_rule": "time cutoffs on TransactionDT, identical for every bank (fill from meta_*.parquet)",
+  "partition_key": "card_key_id (all rows of a card stay in one bank)",
+  "columns": [
+    {
+      "index": 0,
+      "name": "addr1_missing",
+      "group": "binary_flag",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.0,
+      "formula": "binary flag: addr1 is null"
+    },
+    {
+      "index": 1,
+      "name": "email_match",
+      "group": "binary_flag",
+      "dtype": "float32",
+      "source": "engineered",
+      "missing_rate_train_pooled": 0.0,
+      "formula": "binary"
+    },
+    {
+      "index": 2,
+      "name": "DeviceType",
+      "group": "categorical_ordinal",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.6936,
+      "vocab": [
+        "unknown",
+        "desktop",
+        "mobile",
+        "nan"
+      ],
+      "unseen_code": -1
+    },
+    {
+      "index": 3,
+      "name": "id_12",
+      "group": "categorical_ordinal",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.6936,
+      "vocab": [
+        "unknown",
+        "NotFound",
+        "Found"
+      ],
+      "unseen_code": -1
+    },
+    {
+      "index": 4,
+      "name": "id_16",
+      "group": "categorical_ordinal",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.6936,
+      "vocab": [
+        "unknown",
+        "NotFound",
+        "Found",
+        "nan"
+      ],
+      "unseen_code": -1
+    },
+    {
+      "index": 5,
+      "name": "id_18",
+      "group": "categorical_ordinal",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.6936,
+      "vocab": [
+        "unknown",
+        "nan",
+        "15.0",
+        "13.0",
+        "12.0",
+        "18.0",
+        "20.0",
+        "21.0",
+        "26.0",
+        "24.0",
+        "11.0",
+        "17.0",
+        "29.0",
+        "14.0",
+        "23.0",
+        "16.0",
+        "28.0",
+        "25.0"
+      ],
+      "unseen_code": -1
+    },
+    {
+      "index": 6,
+      "name": "id_24",
+      "group": "categorical_ordinal",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.6936,
+      "vocab": [
+        "unknown",
+        "nan",
+        "11.0",
+        "15.0",
+        "16.0",
+        "18.0",
+        "25.0",
+        "12.0",
+        "21.0",
+        "26.0"
+      ],
+      "unseen_code": -1
+    },
+    {
+      "index": 7,
+      "name": "id_34",
+      "group": "categorical_ordinal",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.6936,
+      "vocab": [
+        "unknown",
+        "match_status:2",
+        "nan",
+        "match_status:1",
+        "match_status:0",
+        "match_status:-1"
+      ],
+      "unseen_code": -1
+    },
+    {
+      "index": 8,
+      "name": "id_35",
+      "group": "categorical_ordinal",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.6936,
+      "vocab": [
+        "unknown",
+        "T",
+        "F",
+        "nan"
+      ],
+      "unseen_code": -1
+    },
+    {
+      "index": 9,
+      "name": "id_36",
+      "group": "categorical_ordinal",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.6936,
+      "vocab": [
+        "unknown",
+        "F",
+        "T",
+        "nan"
+      ],
+      "unseen_code": -1
+    },
+    {
+      "index": 10,
+      "name": "id_38",
+      "group": "categorical_ordinal",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.6936,
+      "vocab": [
+        "unknown",
+        "T",
+        "F",
+        "nan"
+      ],
+      "unseen_code": -1
+    },
+    {
+      "index": 11,
+      "name": "TransactionAmt_log",
+      "group": "engineered_local",
+      "dtype": "float32",
+      "source": "engineered",
+      "missing_rate_train_pooled": 0.0,
+      "formula": "log1p(TransactionAmt)"
+    },
+    {
+      "index": 12,
+      "name": "amt_to_avg_card_ratio",
+      "group": "engineered_local",
+      "dtype": "float32",
+      "source": "engineered",
+      "missing_rate_train_pooled": 0.0,
+      "formula": "amt / mean(prior amt), clip[0,100], 1.0 if first seen"
+    },
+    {
+      "index": 13,
+      "name": "card_velocity",
+      "group": "engineered_local",
+      "dtype": "float32",
+      "source": "engineered",
+      "missing_rate_train_pooled": 0.0,
+      "formula": "prior_n / ((DT-first_dt)/86400+1)"
+    },
+    {
+      "index": 14,
+      "name": "transaction_hour",
+      "group": "engineered_local",
+      "dtype": "float32",
+      "source": "engineered",
+      "missing_rate_train_pooled": 0.0,
+      "formula": "int 0-23 (cyclical optional)"
+    },
+    {
+      "index": 15,
+      "name": "card1_freq",
+      "group": "frequency_local",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.0
+    },
+    {
+      "index": 16,
+      "name": "C1",
+      "group": "count_C",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.0
+    },
+    {
+      "index": 17,
+      "name": "C12",
+      "group": "count_C",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.0
+    },
+    {
+      "index": 18,
+      "name": "C2",
+      "group": "count_C",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.0
+    },
+    {
+      "index": 19,
+      "name": "C4",
+      "group": "count_C",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.0
+    },
+    {
+      "index": 20,
+      "name": "C8",
+      "group": "count_C",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.0
+    },
+    {
+      "index": 21,
+      "name": "card3",
+      "group": "raw_numeric",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.0
+    },
+    {
+      "index": 22,
+      "name": "V168",
+      "group": "vesta_V",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.7037
+    },
+    {
+      "index": 23,
+      "name": "V203",
+      "group": "vesta_V",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.7037
+    },
+    {
+      "index": 24,
+      "name": "V217",
+      "group": "vesta_V",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.717
+    },
+    {
+      "index": 25,
+      "name": "V218",
+      "group": "vesta_V",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.717
+    },
+    {
+      "index": 26,
+      "name": "V219",
+      "group": "vesta_V",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.717
+    },
+    {
+      "index": 27,
+      "name": "V229",
+      "group": "vesta_V",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.717
+    },
+    {
+      "index": 28,
+      "name": "V230",
+      "group": "vesta_V",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.717
+    },
+    {
+      "index": 29,
+      "name": "V232",
+      "group": "vesta_V",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.717
+    },
+    {
+      "index": 30,
+      "name": "V257",
+      "group": "vesta_V",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.717
+    },
+    {
+      "index": 31,
+      "name": "V258",
+      "group": "vesta_V",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.717
+    },
+    {
+      "index": 32,
+      "name": "V263",
+      "group": "vesta_V",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.717
+    },
+    {
+      "index": 33,
+      "name": "V264",
+      "group": "vesta_V",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.717
+    },
+    {
+      "index": 34,
+      "name": "V274",
+      "group": "vesta_V",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.717
+    },
+    {
+      "index": 35,
+      "name": "V283",
+      "group": "vesta_V",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.0
+    },
+    {
+      "index": 36,
+      "name": "V294",
+      "group": "vesta_V",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.0
+    },
+    {
+      "index": 37,
+      "name": "V303",
+      "group": "vesta_V",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.0
+    },
+    {
+      "index": 38,
+      "name": "V31",
+      "group": "vesta_V",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.1917
+    },
+    {
+      "index": 39,
+      "name": "V34",
+      "group": "vesta_V",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.1917
+    },
+    {
+      "index": 40,
+      "name": "V40",
+      "group": "vesta_V",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.3446
+    },
+    {
+      "index": 41,
+      "name": "V45",
+      "group": "vesta_V",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.3446
+    },
+    {
+      "index": 42,
+      "name": "V50",
+      "group": "vesta_V",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.3446
+    },
+    {
+      "index": 43,
+      "name": "V52",
+      "group": "vesta_V",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.3446
+    },
+    {
+      "index": 44,
+      "name": "V60",
+      "group": "vesta_V",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.1943
+    },
+    {
+      "index": 45,
+      "name": "V72",
+      "group": "vesta_V",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.1943
+    },
+    {
+      "index": 46,
+      "name": "V81",
+      "group": "vesta_V",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.2059
+    },
+    {
+      "index": 47,
+      "name": "V93",
+      "group": "vesta_V",
+      "dtype": "float32",
+      "source": "raw",
+      "missing_rate_train_pooled": 0.2059
+    }
+  ]
+}

@@ -226,7 +226,7 @@ def importance_select(df: cudf.DataFrame, train_mask, val_mask,
 
         try:
             dtrain = xgb.QuantileDMatrix(X_train, label=train_labels, max_bin=128)
-            dval   = xgb.QuantileDMatrix(X_val,   label=val_labels,   max_bin=128)
+            dval   = xgb.QuantileDMatrix(X_val,   label=val_labels,   max_bin=128, ref=dtrain)
         except Exception:
             dtrain = xgb.DMatrix(X_train, label=train_labels)
             dval   = xgb.DMatrix(X_val,   label=val_labels)

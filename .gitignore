@@ -11,7 +11,9 @@ data/*.parquet
 data/raw/
 data/interim/
 data/processed/
+data/graphs/
 artifacts/*.npz
+results/checkpoints/
 
 # Python cache
 __pycache__/

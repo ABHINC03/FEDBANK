@@ -1,6 +1,6 @@
 # FEDBANK Preprocessing Report
 
-Generated: 2026-10-08 23:21  |  Sample: full
+Generated: 2026-10-09 20:25  |  Sample: full
 
 ## Library Versions
 
@@ -24,16 +24,16 @@ Generated: 2026-10-08 23:21  |  Sample: full
 
 | Stage | Time (s) |
 |---|---|
-| S1 | 4.0 |
-| S2 | 102.9 |
-| S3 | 1.0 |
-| S4 | 5.4 |
-| S5 | 1.3 |
-| S6 | 15.9 |
-| S7 | 14.5 |
-| S8 | 10.9 |
-| S9 | 20.6 |
-| S10 | 3.0 |
+| S1 | 4.9 |
+| S2 | 125.6 |
+| S3 | 1.2 |
+| S4 | 6.5 |
+| S5 | 1.9 |
+| S6 | 21.2 |
+| S7 | 22.2 |
+| S8 | 18.5 |
+| S9 | 32.7 |
+| S10 | 2.4 |
 
 ## Dropped Columns
 
